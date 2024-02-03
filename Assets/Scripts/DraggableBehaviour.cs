@@ -31,10 +31,14 @@ public class DraggableBehaviour : MonoBehaviour
         if (ctx.canceled)
         {
             endDragEvent.Invoke();
-            StopCoroutine(draggingCoroutine);
+            StopDragging();
         }
     }
 
+    public void StopDragging()
+    {
+        StopCoroutine(draggingCoroutine);
+    }
     public IEnumerator Dragging()
     {
         offset = transform.position - cameraObj.ScreenToWorldPoint(new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, cameraObj.WorldToScreenPoint(transform.position).z));
